@@ -5,7 +5,7 @@
     "EnableDbMod": true
   },
   "DatabaseSettings": {
-    "ConnecterId": "4e0f1994-40f4-4d4b-8a02-d48f6ee6a180",
+    "ConnecterId": "06cdd5e6-47f0-4f84-8457-10c1f8376139",
     "Databases": [
       {
         "Source": {
@@ -20,7 +20,7 @@
           {
             "Name": "DMS",
             "Properties": {
-              "DmsArn": "arn:aws:dms:us-east-1:392866756735:migration-project:5WB2KQIX6JBK5ORBNRAJTHT7RQ"
+              "DmsArn": "arn:aws:dms:us-east-1:672177589789:migration-project:KAQODRFTMRHWHDOEAHFGFQULOY"
             }
           }
         ]

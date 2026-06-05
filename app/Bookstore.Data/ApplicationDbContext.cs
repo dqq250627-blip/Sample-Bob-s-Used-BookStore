@@ -77,12 +77,16 @@ namespace Bookstore.Data
                 entity.Property(e => e.CreatedBy).HasColumnName("createdby");
                 entity.Property(e => e.CreatedOn).HasColumnName("createdon");
                 entity.Property(e => e.UpdatedOn).HasColumnName("updatedon");
+
+                entity.HasOne(x => x.Publisher).WithMany().HasForeignKey(x => x.PublisherId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.BookType).WithMany().HasForeignKey(x => x.BookTypeId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.Genre).WithMany().HasForeignKey(x => x.GenreId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.Condition).WithMany().HasForeignKey(x => x.ConditionId).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.ToTable("customer", "bobsusedbookstore_dbo");
-                entity.HasIndex(x => x.Sub).IsUnique();
                 entity.Property(e => e.Sub).HasColumnName("sub");
                 entity.Property(e => e.Username).HasColumnName("username");
                 entity.Property(e => e.FirstName).HasColumnName("firstname");
@@ -94,12 +98,13 @@ namespace Bookstore.Data
                 entity.Property(e => e.CreatedBy).HasColumnName("createdby");
                 entity.Property(e => e.CreatedOn).HasColumnName("createdon");
                 entity.Property(e => e.UpdatedOn).HasColumnName("updatedon");
+
+                entity.HasIndex(x => x.Sub).IsUnique();
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("orders", "bobsusedbookstore_dbo");
-                entity.HasOne(x => x.Customer).WithMany().OnDelete(DeleteBehavior.Restrict);
                 entity.Property(e => e.CustomerId).HasColumnName("customerid");
                 entity.Property(e => e.AddressId).HasColumnName("addressid");
                 entity.Property(e => e.DeliveryDate).HasColumnName("deliverydate");
@@ -108,6 +113,8 @@ namespace Bookstore.Data
                 entity.Property(e => e.CreatedBy).HasColumnName("createdby");
                 entity.Property(e => e.CreatedOn).HasColumnName("createdon");
                 entity.Property(e => e.UpdatedOn).HasColumnName("updatedon");
+
+                entity.HasOne(x => x.Customer).WithMany().OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<ShoppingCart>(entity =>
@@ -148,10 +155,6 @@ namespace Bookstore.Data
             modelBuilder.Entity<Offer>(entity =>
             {
                 entity.ToTable("offer", "bobsusedbookstore_dbo");
-                entity.HasOne(x => x.Publisher).WithMany().HasForeignKey(x => x.PublisherId).OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(x => x.BookType).WithMany().HasForeignKey(x => x.BookTypeId).OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(x => x.Genre).WithMany().HasForeignKey(x => x.GenreId).OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(x => x.Condition).WithMany().HasForeignKey(x => x.ConditionId).OnDelete(DeleteBehavior.Restrict);
                 entity.Property(e => e.Author).HasColumnName("author");
                 entity.Property(e => e.ISBN).HasColumnName("isbn");
                 entity.Property(e => e.BookName).HasColumnName("bookname");
@@ -169,10 +172,7 @@ namespace Bookstore.Data
                 entity.Property(e => e.CreatedBy).HasColumnName("createdby");
                 entity.Property(e => e.CreatedOn).HasColumnName("createdon");
                 entity.Property(e => e.UpdatedOn).HasColumnName("updatedon");
-            });
 
-            modelBuilder.Entity<Book>(entity =>
-            {
                 entity.HasOne(x => x.Publisher).WithMany().HasForeignKey(x => x.PublisherId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(x => x.BookType).WithMany().HasForeignKey(x => x.BookTypeId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(x => x.Genre).WithMany().HasForeignKey(x => x.GenreId).OnDelete(DeleteBehavior.Restrict);

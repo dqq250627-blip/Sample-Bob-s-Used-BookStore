@@ -13,7 +13,6 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Npgsql;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 
 namespace Bookstore.Web.Startup
